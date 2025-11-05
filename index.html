@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maison Zuri — Lagos Island Luxury Fashion</title>
+  <meta name="description" content="Maison Zuri: exclusive fashion boutique in Lagos Island, Nigeria. High-end designer clothing, handbags, and accessories curated from Paris, Milan, and London." />
+  <!-- Google Fonts for Playfair Display (serif) and Lato (sans-serif) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --gold: #c9a400;
+      --ivory: #f7f3ee;
+      --ivory2: #f1efe8;
+      --shadow: 0 8px 20px rgba(0,0,0,.08);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: #1a1a1a;
+      background: #fff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Global utility */
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Subtle text emphasis */
+    .sr { position: absolute; left: -9999px; }
+
+    /* Layout */
+    header.site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(1.1) blur(6px);
+      border-bottom: 1px solid rgba(0,0,0,.05);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; font-family: 'Playfair Display', serif; font-size: 28px; letter-spacing: .5px; }
+    .brand .dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; display: inline-block; }
+    nav { display: flex; gap: 8px; align-items: center; }
+    nav .nav-item { border: none; background: transparent; padding: 8px 12px; font-family: 'Lato', sans-serif; color: #333; border-radius: 8px; cursor: pointer; transition: all .2s ease; }
+    nav .nav-item:hover { background: #111; color: #fff; }
+
+    /* Hero */
+    .hero {
+      position: relative; height: min(72vh, 700px); display: grid; place-items: center; text-align: center; color: white;
+      overflow: hidden;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+      isolation: isolate;
+    }
+    .hero:after {
+      content: '';
+      position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.65)); mix-blend-mode: multiply;
+    }
+    .hero-content { position: relative; z-index: 1; padding: 40px 20px; max-width: 900px; }
+    .tag { font-family: 'Playfair Display', serif; font-size: 48px; line-height: 1.05; margin: 0 0 12px; letter-spacing: .5px; text-shadow: 0 2px 6px rgba(0,0,0,.25); }
+    .sub { font-family: 'Lato', sans-serif; font-size: 18px; color: #f5f2e8; opacity: .95; margin-bottom: 20px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 8px; }
+    .btn { border: none; border-radius: 999px; padding: 14px 22px; font-family: 'Lato', sans-serif; font-weight: 700; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+    .btn.primary { background: #000; color: #fff; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+    .btn.secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.8); }
+    .btn:focus { outline: 2px solid #fff; outline-offset: 2px; }
+
+    /* Sections */
+    section { padding: 72px 0; }
+    h2.section-title { font-family: 'Playfair Display', serif; font-size: 32px; margin: 0 0 18px; }
+    .section-sub { color: #666; margin-bottom: 20px; font-family: 'Lato', sans-serif; }
+
+    /* Grids */
+    .grid { display: grid; gap: 22px; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid #eee; transition: transform .25s ease, box-shadow .25s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 28px rgba(0,0,0,.08); }
+    .card img { width: 100%; height: 260px; object-fit: cover; display: block; }
+    .card-body { padding: 14px 14px 18px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 16px; margin: 0 0 6px; }
+    .price { font-family: 'Lato', sans-serif; color: #333; font-weight: 700; }
+    .muted { color: #777; font-size: 13px; }
+    .hover-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px; background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.15)); color: #fff; font-size: 12px; opacity: 0; transform: translateY(12px); transition: all .25s ease; }
+    .card:hover .hover-caption { opacity: 1; transform: translateY(0); }
+
+    /* Sections detail visuals */
+    .split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; align-items: center; }
+    .split .text { font-family: 'Lato', sans-serif; color: #555; }
+    .look-image { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
+
+    /* Testimonials */
+    blockquote { font-family: 'Lato', sans-serif; font-size: 16px; color: #333; border-left: 3px solid var(--gold); padding-left: 14px; margin: 14px 0; }
+    .review { padding: 14px; border-radius: 12px; background: #fff; border: 1px solid #eee; }
+    .stars { color: #e3a81a; }
+
+    /* Map / Visit */
+    .map-container { width: 100%; height: 420px; border: none; border-radius: 12px; overflow: hidden; }
+
+    /* Footer */
+    footer.site-footer { padding: 40px 0; border-top: 1px solid #eee; background: #fff; color: #555; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    /* Floating WhatsApp button (Africa region) */
+    .float-chat {
+      position: fixed; right: 24px; bottom: 24px; z-index: 60;
+      width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: #25D366; box-shadow: 0 6px 14px rgba(0,0,0,.15); cursor: default;
+      border: none; color: #fff; font-size: 0; transition: transform .2s ease;
+    }
+    .float-chat:hover { transform: translateY(-2px); }
+    .float-chat .plus { width: 0; height: 0; }
+    .float-chat svg { width: 28px; height: 28px; }
+
+    /* Minor responsive tweaks */
+    @media (max-width: 1024px) {
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .split { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero { height: 60vh; }
+      .tag { font-size: 38px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating WhatsApp button (Africa region) -->
+  <a href="https://wa.me/2348000000000?text=Hello%20Maison%20Zuri%20-%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener" aria-label="Chat via WhatsApp" class="float-chat" title="WhatsApp">
+    <!-- WhatsApp Icon (inline SVG) -->
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M20.5 3.5h-17A3.5 3.5 0 0 0 0 7v10a3.5 3.5 0 0 0 3.5 3.5h17a3.5 3.5 0 0 0 3.5-3.5V7a3.5 3.5 0 0 0-3.5-3.5z" fill="#fff" fill-opacity="0.0"/>
+      <path d="M20.4 3.6h-1.1V2.5H4.7v1.1H3.6C2.9 3.6 2.3 4.2 2.3 5v12c0 .6.4 1.2 1 1.2h14.6c.6 0 1-.6 1-1.2V5c0-.8-.5-1.4-1.2-1.4z" fill="#25D366"/>
+      <path d="M18.1 6.1l-1.1 1A9.1 9.1 0 0 1 7 12a9.1 9.1 0 0 1-7.6-4.9l-1-1.2v-.1h26.7L18.1 6.1z" fill="#fff" opacity=".1" />
+      <path d="M7.8 12.9l-.6-.6c-1-1-1-2.6 0-3.7l.7-.7 1.9 2.1-1.0.8c-.4.3-.5.8-.3 1.2.2.4.6.6 1 .6h.1l.1.2c.6.7-1.3 2.9-1.9 2.5h-.3z" fill="#fff"/>
+    </svg>
+  </a>
+
+  <!-- Header / Navigation -->
+  <header class="site-header" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <div class="brand" aria-label="Maison Zuri logo">
+        <span class="dot" aria-hidden="true"></span>
+        <span style="font-family:'Playfair Display', serif; font-weight:700; letter-spacing:.5px;">Maison Zuri</span>
+      </div>
+      <nav aria-label="Primary">
+        <button class="nav-item" type="button">Home</button>
+        <button class="nav-item" type="button">Collections</button>
+        <button class="nav-item" type="button">Lookbook</button>
+        <button class="nav-item" type="button">Visit Us</button>
+        <button class="nav-item" type="button">About</button>
+        <button class="nav-item" type="button">Contact</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" style="background-image:url('https://im.runware.ai/image/ws/2/ii/ca4e22e7-dc35-472e-b8a5-1d07e20b7ec0.jpg');">
+    <div class="hero-content container">
+      <p class="tag" style="color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.4);">Where Elegance Meets Africa’s Pulse</p>
+      <p class="sub" style="color:#f4efe1; max-width: 700px; margin: 0 auto;">Maison Zuri — Lagos Island’s exclusive boutique curating couture from Paris, Milan, and London.</p>
+      <div class="cta-row" aria-label="Hero CTAs">
+        <button class="btn primary" type="button" style="background:#000; color:#fff;">Shop Latest Arrivals</button>
+        <button class="btn secondary" type="button" style="border:1px solid rgba(255,255,255,.8); color:#fff; background:transparent;">Explore Collections</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Home / Latest Arrivals -->
+  <section id="latest-arrivals" aria-labelledby="latest-arrivals-title" class="container">
+    <h2 id="latest-arrivals-title" class="section-title">Latest Arrivals</h2>
+    <p class="section-sub">New season edits from Lagos to Paris, with editorial photography and Lagos’ vibrant energy.</p>
+    <div class="grid grid-3" style="gap:22px;">
+      <article class="card" aria-label="Arrival 1">
+        <img src="https://im.runware.ai/image/ws/2/ii/d75104ac-bdda-49e1-a45d-08f14675c68c.jpg" alt="Evening couture dress from Maison Zuri" />
+        <div class="card-body">
+          <h3 class="card-title">Evening Couture Gown</h3>
+          <div class="price">₦2,400,000</div>
+          <p class="muted" style="margin:6px 0 0;">Lagos Edition — a statement of precision tailoring.</p>
+          <div class="hover-caption">Exclusive, limited run</div>
+        </div>
+      </article>
+      <article class="card" aria-label="Arrival 2">
+        <img src="https://im.runware.ai/image/ws/2/ii/0262a85d-9e99-40d7-ad7f-57ec5a8ad1d3.jpg" alt="Designer clutch with African motifs" />
+        <div class="card-body">
+          <h3 class="card-title">Statement Handbag</h3>
+          <div class="price">₦1,150,000</div>
+          <p class="muted" style="margin:6px 0 0;">Paris-Mashion meets Lagos luxe in refined leather.</p>
+          <div class="hover-caption">Limited availability</div>
+        </div>
+      </article>
+      <article class="card" aria-label="Arrival 3">
+        <img src="https://im.runware.ai/image/ws/2/ii/ca4e22e7-dc35-472e-b8a5-1d07e20b7ec0.jpg" alt="Silk scarf with gold accents" />
+        <div class="card-body">
+          <h3 class="card-title">Silk Scarf</h3>
+          <div class="price">₦320,000</div>
+          <p class="muted" style="margin:6px 0 0;">Cross-season essential with African-inspired motifs.</p>
+          <div class="hover-caption">New colors available</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Features / Designers -->
+  <section aria-labelledby="designers-title" class="container" style="padding-top:0; padding-bottom:0;">
+    <div class="split">
+      <div class="text" style="padding-right:8px;">
+        <h2 id="designers-title" class="section-title" style="margin-top:0;">Featured Designers</h2>
+        <p class="section-sub">A curated roster from fashion capitals with Lagos flair. Each piece embodies refinement, confidence, and global couture with African soul.</p>
+        <p class="muted" style="font-family:'Lato', sans-serif;">Maison Zuri collaborates with ateliers across Paris, Milan, and London, bringing exclusive capsules to Lagos Island with meticulous craftsmanship.</p>
+      </div>
+      <div class="look-image" aria-label="Designer collage">
+        <img src="https://im.runware.ai/image/ws/2/ii/1ed85713-fc6f-4e10-97bb-f36b8432f761.jpg" alt="Editorial designer portrait" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section aria-labelledby="testimonials-title" class="container" style="padding-top:0;">
+    <h2 id="testimonials-title" class="section-title">What clients say</h2>
+    <p class="section-sub">Affluent fashion-forward Nigerians and international visitors share their Maison Zuri experience.</p>
+    <div class="grid grid-3" style="grid-template-columns: repeat(3, 1fr);">
+      <blockquote class="review" aria-label="Testimonial 1">
+        <p>“Maison Zuri brings European luxury right to Lagos — a true gem.”</p>
+        <div class="stars" aria-label="stars">★★★★★</div>
+      </blockquote>
+      <blockquote class="review" aria-label="Testimonial 2">
+        <p>“Their service feels personal, and every piece is a statement.”</p>
+        <div class="stars" aria-label="stars">★★★★★</div>
+      </blockquote>
+      <blockquote class="review" aria-label="Testimonial 3">
+        <p>“Shopping here made me fall in love with African luxury all over again.”</p>
+        <div class="stars" aria-label="stars">★★★★★</div>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Collections (Women / Men / Accessories) -->
+  <section aria-labelledby="collections-title" class="container" style="padding-top:0;">
+    <h2 id="collections-title" class="section-title">Collections</h2>
+    <p class="section-sub">Explore by category. Delicate silhouettes, bold statements, and luxurious textures.</p>
+    <div class="grid grid-4" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="card" aria-label="Women collection">
+        <img src="https://im.runware.ai/image/ws/2/ii/1ed85713-fc6f-4e10-97bb-f36b8432f761.jpg" alt="Women's collection" />
+        <div class="card-body">
+          <h3 class="card-title">Women</h3>
+          <p class="muted" style="margin:0;">Couture gowns, sculptural tailoring, refined fabrics.</p>
+        </div>
+      </div>
+      <div class="card" aria-label="Men collection">
+        <img src="https://im.runware.ai/image/ws/2/ii/0262a85d-9e99-40d7-ad7f-57ec5a8ad1d3.jpg" alt="Men's collection" />
+        <div class="card-body">
+          <h3 class="card-title">Men</h3>
+          <p class="muted" style="margin:0;">Sharp suiting with understated luxury details.</p>
+        </div>
+      </div>
+      <div class="card" aria-label="Accessories collection">
+        <img src="https://im.runware.ai/image/ws/2/ii/ca4e22e7-dc35-472e-b8a5-1d07e20b7ec0.jpg" alt="Accessories" />
+        <div class="card-body">
+          <h3 class="card-title">Accessories</h3>
+          <p class="muted" style="margin:0;">Scarves, handbags, and jewelry with African luxury cues.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lookbook ( Lagos visuals ) -->
+  <section aria-labelledby="lookbook-title" class="container" style="padding-top:0;">
+    <h2 id="lookbook-title" class="section-title">Lookbook: Lagos Edition</h2>
+    <p class="section-sub">A visual narrative across Lagos — street style, architecture, and couture moments.</p>
+    <div class="look-image" style="border-radius:12px; overflow:hidden; border:1px solid #eee;">
+      <img src="https://im.runware.ai/image/ws/2/ii/ca4e22e7-dc35-472e-b8a5-1d07e20b7ec0.jpg" alt="Lookbook Lagos editorial" style="width:100%; height:520px; object-fit:cover; display:block;">
+    </div>
+  </section>
+
+  <!-- Visit Us -->
+  <section aria-labelledby="visit-title" class="container" style="padding-top:0;">
+    <h2 id="visit-title" class="section-title">Visit Us</h2>
+    <p class="section-sub">Maison Zuri — Lagos Island, Nigeria. Walk in for private appointments and personalized styling.</p>
+    <div class="split" style="gap:28px; align-items:start;">
+      <div class="text" style="font-family:'Lato', sans-serif; color:#555;">
+        <p>Store hours: Mon–Sat, 10:00–19:00. Closed Sundays.</p>
+        <p>Address: Lagos Island, Lagos, Nigeria.</p>
+        <p>Phone: +234 800 000 0000 (placeholder)</p>
+      </div>
+      <div class="map-container-wrapper" style="width:100%;">
+        <iframe class="map-container" title="Maison Zuri map" src="https://maps.google.com/maps?q=Lagos%20Island%20Lagos%20Nigeria&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact (WhatsApp & Email placeholders) -->
+  <section aria-labelledby="contact-title" class="container" style="padding-top:0;">
+    <h2 id="contact-title" class="section-title">Contact for Private Appointments</h2>
+    <p class="section-sub">Private styling and appointment requests via WhatsApp and Email (placeholders).</p>
+    <div class="grid grid-2" style="display:grid; grid-template-columns: 1fr 1fr; gap:22px; align-items:start;">
+      <div class="card" aria-label="WhatsApp contact">
+        <div class="card-body">
+          <h3 class="card-title">WhatsApp</h3>
+          <p class="muted" style="margin:0 0 8px;">Chat with a Maison Zuri stylist (Nigeria) – wa.me/2348000000000</p>
+          <button class="btn" type="button" style="background:#111; color:#fff;">WhatsApp Chat (placeholder)</button>
+        </div>
+      </div>
+      <div class="card" aria-label="Email contact">
+        <div class="card-body">
+          <h3 class="card-title">Email</h3>
+          <p class="muted" style="margin:0 0 8px;">appointments@mazuri.example (placeholder)</p>
+          <button class="btn" type="button" style="background:#111; color:#fff;">Email Appointment (placeholder)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="container footer-grid" style="align-items:start;">
+      <div>
+        <strong Maison Zuri</strong>
+        <p class="muted" style="margin:6px 0 0;">Exclusive fashion boutique on Lagos Island. Couture from Paris, Milan, London.</p>
+      </div>
+      <div style="text-align:right;">
+        <p class="muted" style="margin:0;">made with ❤️ by adorrable.dev</p>
+        <p class="muted" style="margin:6px 0 0;">Contact: +234 800 000 0000 (placeholder)</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Optional small JS for minor interactions (no routing/actions) -->
+  <script>
+    // Lightweight, non-functional interaction hints (no routing/actions)
+    // Simple hover feel: nothing to execute beyond CSS transitions
+  </script>
+</body>
+</html>
